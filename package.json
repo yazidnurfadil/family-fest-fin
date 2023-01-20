@@ -1,0 +1,33 @@
+{
+  "name": "fest-fam",
+  "version": "0.0.1-r230119.1",
+  "description": "Festival Family Financial Log",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch main.js",
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yazidnurfadil/family-fest-fin.git"
+  },
+  "author": "Yazid Nurfadil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yazidnurfadil/family-fest-fin/issues"
+  },
+  "homepage": "https://github.com/yazidnurfadil/family-fest-fin#readme",
+  "keywords": [
+    "festival",
+    "family"
+  ],
+  "devDependencies": {
+    "telegraf": "^4.11.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ololog": "^1.1.175",
+    "pretty-print": "^2.0.0",
+    "sheetdb-node": "^0.0.12"
+  }
+}
