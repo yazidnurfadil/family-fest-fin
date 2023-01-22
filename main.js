@@ -4,6 +4,7 @@ dotenv.config();
 import log from "ololog";
 
 import { Telegraf, Markup } from "telegraf";
+import { mappingCurrency } from "./helper.js";
 
 // import sheetdb from "sheetdb-node";
 // // create a config file
@@ -17,7 +18,9 @@ import { Telegraf, Markup } from "telegraf";
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.use(Telegraf.log());
-
+bot.telegram.getMe().then((botInfo) => {
+  bot.options.username = botInfo.username
+})
 bot.command("quit", async (ctx) => {
   // Explicit usage
   await ctx.telegram.leaveChat(ctx.message.chat.id);
@@ -59,8 +62,13 @@ bot.action("laporan", (ctx) => {
 });
 
 bot.command("reimburse", (ctx) => {
-  log(ctx);
-});
+  log(ctx.message);
+  const textArr = ctx.message.text.split(' ')
+  const nominal = mappingCurrency(textArr[1])
+  const kebutuhan = textArr.splice(2).join(' ')
+  const sender = `${ctx.message.from.first_name} ${ctx.message.from.last_name}`
+  ctx.telegram.sendMessage(process.env.GROUP_ID, `${sender} request reimbursment senilai ${nominal} untuk ${kebutuhan}`)
+}); 
 
 bot.on("callback_query", async (ctx) => {
   // Using context shortcut
